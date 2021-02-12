@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const { uniqueNamesGenerator, NumberDictionary } = require('unique-names-generator');
-const notes = require('./db/db.json');
+let notes = require('./db/db.json');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +21,14 @@ app.post('/api/notes', (req, res) => {
     notes.push(newNote);
     fs.writeFileSync('./db/db.json', JSON.stringify(notes));
     res.json(newNote);
+});
+
+app.delete('/api/notes/:id', (req,res) => {
+    const deleteThisId = req.params.id;
+    const notes2 = notes.filter(note => note.id != deleteThisId);
+    notes = notes2;
+    fs.writeFileSync('./db/db.json', JSON.stringify(notes));
+    res.json(notes);
 });
 
 
