@@ -4,7 +4,7 @@
     <h3 align="center">Jot It Down</h3>
     <br />
     <p align="center">
-    Jot it or forget it!
+    Take notes with Express
     <br />
     <br />
     <a href="https://jot-it-down-by-wdfhai.herokuapp.com/">View Demo</a>
