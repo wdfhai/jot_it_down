@@ -11,9 +11,9 @@
     </p>
 </div>
 
-<img src="./images/preview.png" alt="project preview img" style="height: 250px; width: 300px;">
+<img src="./images/Preview.png" alt="project preview img" style="height: 250px; width: 300px;">
 <br />
-<img src="./images/preview2.png" alt="project preview img" style="height: 250px; width: 300px;">
+<img src="./images/Preview2.png" alt="project preview img" style="height: 250px; width: 300px;">
 
 <details open="open">
     <summary>Table of Contents</summary>
