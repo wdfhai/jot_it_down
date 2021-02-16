@@ -2,6 +2,7 @@ let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
+let editNoteBtn;
 let noteList;
 
 if (window.location.pathname === '/notes') {
@@ -9,6 +10,7 @@ if (window.location.pathname === '/notes') {
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
+  editNoteBtn = document.querySelector('.edit-note');
   noteList = document.querySelectorAll('.list-container .list-group');
 }
 
@@ -52,15 +54,18 @@ const deleteNote = (id) =>
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
+  show(newNoteBtn);
 
   if (activeNote.id) {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
+    show(editNoteBtn);
   } else {
     noteTitle.value = '';
     noteText.value = '';
+    hide(editNoteBtn);
   }
 };
 
@@ -116,6 +121,15 @@ const handleRenderSaveBtn = () => {
   }
 };
 
+//Enables active note to be edited
+const handleNoteEdit = () => {
+  show(saveNoteBtn);
+  hide(newNoteBtn);
+  hide(editNoteBtn);
+  noteTitle.removeAttribute('readonly');
+  noteText.removeAttribute('readonly');
+}
+
 // Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
@@ -169,12 +183,15 @@ const renderNoteList = async (notes) => {
   }
 };
 
+hide(editNoteBtn);
+
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
+  editNoteBtn.addEventListener('click', handleNoteEdit)
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
